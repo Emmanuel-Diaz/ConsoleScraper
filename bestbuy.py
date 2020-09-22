@@ -15,15 +15,23 @@ if __name__ == "__main__":
     driver = webdriver.Chrome(ChromeDriverManager().install())
 
     if not SIGNED_IN:
-        user = input("Enter best buy email")
-        password = input("Enter best buy password")
+        user = input("Enter best buy email: ")
+        password = input("Enter best buy password: ")
+        console = input("Enter X for Series X or S for Series S")
         bbu.best_buy_sign_in(driver, user, password)
         SIGNED_IN = True
 
+    console_link = BEST_BUY_X if console=="X" else BEST_BUY_S
+    answer = input("Press Enter to begin")
     while(True):
-        answer = input("Enter 'START' to begin")
-        if answer=="START":
-            bbu.best_buy_get_item(driver,BEST_BUY_X)
+        
+        order_placed = False
+        try:
+            order_placed = bbu.best_buy_get_item(driver,console_link)
+        except:
+            pass
+
+        if order_placed:
             break
 
 

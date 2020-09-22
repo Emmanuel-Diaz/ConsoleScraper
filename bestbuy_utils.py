@@ -14,13 +14,9 @@ def best_buy_sign_in(drive, USER, PASS):
 
 
     #Get to Login Prompt
-    try:
-        #drive.find_element_by_xpath('//button[@data-lid="hdr_signin"]').click()
-        drive.find_element_by_xpath('//button[@class="lam-signIn__button btn btn-secondary"]').click()
-    except:
-        sleep(2)
-        #drive.find_element_by_xpath('//button[@data-lid="hdr_signin"]').click()
-        drive.find_element_by_xpath('//button[@class="lam-signIn__button btn btn-secondary"]').click()
+    drive.find_element_by_xpath('//button[@data-lid="hdr_signin"]').click()
+    sleep(2)
+    drive.find_element_by_xpath('//button[@class="lam-signIn__button btn btn-secondary"]').click()
     
     sleep(3)
     
@@ -41,9 +37,12 @@ def best_buy_get_item(drive, link):
     
     #Add to cart
     drive.find_element_by_xpath('//div[@class="fulfillment-add-to-cart-button"]').click()
-    
+
+        
     #Go to fulfillment page
     drive.get("https://www.bestbuy.com/checkout/r/fast-track")
     
     #Place order
     drive.find_element_by_xpath('//button[starts-with (@data-track, "Place")]').click()
+    print("Order Placed!")
+    return True
